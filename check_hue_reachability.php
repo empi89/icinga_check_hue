@@ -50,7 +50,7 @@ class HueIcingaCheck
     {
         $response = $this->apiGetRequest("config");
         if (isset($response->swupdate)) {
-            return 3 !== $response->swupdate->updatestate;
+            return 0 !== $response->swupdate->updatestate;
         } else {
             throw new RuntimeException("No update information available. Authorization failed?");
         }
@@ -87,5 +87,6 @@ try {
     echo "OK".PHP_EOL;
     exit(0);
 } catch (Exception $e) {
-    exit("Check failed with exception ".$e->getMessage().PHP_EOL);
+    echo "Check failed with exception ".$e->getMessage().PHP_EOL;
+    exit(2);
 }
